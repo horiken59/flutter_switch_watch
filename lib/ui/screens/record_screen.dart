@@ -108,8 +108,9 @@ class _RecordScreenState extends State<RecordScreen> {
                   return ListTile(
                     title: Text(task),
                     trailing: const Text('00:00:00'),
-                    tileColor:
-                        isActive ? Colors.lightBlue.shade50 : Colors.white,
+                    tileColor: isActive
+                        ? Colors.lightBlue.shade50
+                        : Colors.white,
                     onTap: () => _onTapTask(task),
                   );
                 },

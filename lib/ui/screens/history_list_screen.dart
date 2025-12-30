@@ -13,9 +13,7 @@ class HistoryListScreen extends StatelessWidget {
       {'id': 'session-2', 'workName': 'Work 2', 'total': '00:05:00'},
     ];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('History List'),
-      ),
+      appBar: AppBar(title: const Text('History List')),
       body: dummySessions.isEmpty
           ? const Center(child: Text('履歴がありません'))
           : ListView.builder(

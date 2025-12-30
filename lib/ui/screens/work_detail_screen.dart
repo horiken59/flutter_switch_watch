@@ -10,15 +10,9 @@ class WorkDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const tasks = [
-      'Task 1',
-      'Task 2',
-      'Task 3',
-    ];
+    const tasks = ['Task 1', 'Task 2', 'Task 3'];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Work Detail'),
-      ),
+      appBar: AppBar(title: const Text('Work Detail')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

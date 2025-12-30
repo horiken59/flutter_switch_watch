@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/providers.dart';
 import '../../app/router.dart';
 
-class WorkListScreen extends StatelessWidget {
+class WorkListScreen extends ConsumerWidget {
   const WorkListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    const dummyWorks = [
-      {'id': 'work-1', 'name': 'Work 1'},
-      {'id': 'work-2', 'name': 'Work 2'},
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final worksAsync = ref.watch(worksStreamProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -27,22 +26,30 @@ class WorkListScreen extends StatelessWidget {
         onPressed: () => context.pushNamed(AppRoute.workNew),
         child: const Icon(Icons.add),
       ),
-      body: dummyWorks.isEmpty
-          ? const Center(child: Text('Workがありません。作成してください'))
-          : ListView.builder(
-              itemCount: dummyWorks.length,
-              itemBuilder: (context, index) {
-                final work = dummyWorks[index];
-                return ListTile(
-                  title: Text(work['name']!),
-                  onTap: () => context.pushNamed(
-                    AppRoute.workDetail,
-                    pathParameters: {'workId': work['id']!},
-                  ),
-                  trailing: const Icon(Icons.chevron_right),
-                );
-              },
-            ),
+      body: worksAsync.when(
+        data: (works) {
+          if (works.isEmpty) {
+            return const Center(child: Text('Workがありません。作成してください'));
+          }
+          return ListView.builder(
+            itemCount: works.length,
+            itemBuilder: (context, index) {
+              final work = works[index];
+              final workId = work.id.toString();
+              return ListTile(
+                title: Text(work.name),
+                onTap: () => context.pushNamed(
+                  AppRoute.workDetail,
+                  pathParameters: {'workId': workId},
+                ),
+                trailing: const Icon(Icons.chevron_right),
+              );
+            },
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, _) => Center(child: Text('読み込みに失敗しました: $error')),
+      ),
     );
   }
 }

@@ -29,6 +29,14 @@
   - docs/requirements.md
   - docs/ui-spec.md
 
+### Q11. Work一覧の並び順
+- 現状:
+  - 並び順の指定がない
+- 検討点:
+  - 作成日時降順 / 名前昇順など、一覧表示のソートルールを決めるか
+- 反映先:
+  - docs/ui-spec.md
+
 ---
 
 ## 2. 記録ロジック・挙動に関する未決事項
@@ -138,4 +146,3 @@
   - UI → docs/ui-spec.md
   - 設計 → docs/architecture.md / docs/data-model.md
 - 決定後、このファイルから該当項目を削除する
-
