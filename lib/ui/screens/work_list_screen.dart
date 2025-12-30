@@ -14,7 +14,7 @@ class WorkListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Work List'),
+        title: const Text('Work L'),
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
